@@ -3,70 +3,62 @@ const violeta = document.getElementById('violeta');
 const naranja = document.getElementById('naranja');
 const verde = document.getElementById('verde');
 const btnEmpezar = document.getElementById('btnEmpezar');
-let niveles = 10
+let cantidadSecuancia = 10
+
+//las funciones se pueden crear dentro del constructor de la clase con this
+//las variables escrita con this se deben declarar dentro de una funcion de esa manera esa varible puede 
+//ser llamada fuera de dicha funcion
 
 class Juego {
     constructor(){
-      this.deleteBtn()
-      this.generarSecuencia()
-     
-      this.nivel = 1
+      this.inicializar()
+      this.generarSecuencia()    
+      
+      this.color = {
+          celeste,
+          verde,
+          naranja,
+          violeta
+      }
       
     }
-    
-    
-    deleteBtn(){
+      
+    inicializar(){
         btnEmpezar.classList.add('hide');
+        this.nivel = 3
+       
     }
+    
 
     generarSecuencia(){
-        let arrays = new Array(niveles)
-       
-        let secuencia = arrays.fill(0).map(n =>{
-           return Math.floor(Math.random() * 4)
-        })
-        console.log(secuencia)   
-       this.establecerSecuencia(secuencia)
-    }
-
-    establecerSecuencia(n){ 
-        for (let i = 0; i < n.length; i++) {   
-             let num 
-            setTimeout(function(){ 
-                 num = n[i]
-                 
-             }, 1000 * i);
-             this.cambiarnumeroAcolor(n[i])           
-        }
+        this.secuencia = new Array(cantidadSecuancia).fill(0).map(n => {
+            return Math.floor(Math.random() * 4)
+         })
+         this.iniciarNiveles()
+         console.log(this.secuencia)
          
     }
-    cambiarnumeroAcolor (numero){
-       
+    iniciarNiveles() { 
+        console.log(this.nivel)
+        console.log(this.secuencia[0])
+    }
+   
+    
+    cambiarnumeroAcolor (numero){     
         switch(numero){
             case 1 :
-                this.color = violeta;
+                return 'violeta'
             case 2 :
-                this.color = verde;
+                return 'verde'
             case 3 :
-                this.color = naranja;
+                return 'naranja'
             case 4 :
-                this.color = celeste;
+                return 'celeste'
         }
         console.log(this.color)
         this.iluminarColor(this.color)
     }
 
-    iluminarColor(n){
-          if (n == violeta) {
-            setTimeout(function(){ 
-                violeta.classList.add('light')
-             }, 1000 * i);
-               violeta.classList.remove(' light')               
-             
-          } else {
-              
-          }
-    }
 }
 
 
