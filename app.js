@@ -12,7 +12,7 @@ let cantidadSecuancia = 10
 class Juego {
     constructor(){
       this.inicializar()
-      this.generarSecuencia()    
+     
       
       this.color = {
           celeste,
@@ -24,41 +24,77 @@ class Juego {
     }
       
     inicializar(){
+        
         btnEmpezar.classList.add('hide');
-        this.nivel = 3
-       
+        this.nivel = 1
+        this.siguienteNivel()  
+       this.eventosClick() 
+        
+    }
+
+    siguienteNivel(){
+        
+        this.generarSecuencia()      
     }
     
-
     generarSecuencia(){
+        
         this.secuencia = new Array(cantidadSecuancia).fill(0).map(n => {
             return Math.floor(Math.random() * 4)
          })
          this.iniciarNiveles()
-         console.log(this.secuencia)
-         
+         //console.log(this.secuencia)        
     }
+
     iniciarNiveles() { 
-        console.log(this.nivel)
-        console.log(this.secuencia[0])
+        
+        for (let i = 0; i < this.nivel; i++) {
+            
+            setTimeout(() => {
+                let color = this.cambiarnumeroAcolor(this.secuencia[i])
+                this.iluminarColor(color)
+               
+            }, 1000*i);           
+        }    
     }
    
     
     cambiarnumeroAcolor (numero){     
         switch(numero){
+            case 0 :
+                return 'celeste'
             case 1 :
                 return 'violeta'
             case 2 :
-                return 'verde'
-            case 3 :
                 return 'naranja'
-            case 4 :
-                return 'celeste'
-        }
-        console.log(this.color)
-        this.iluminarColor(this.color)
+            case 3 :
+                return 'verde'
+        }              
+    }
+    iluminarColor(color){
+           this.color[color].classList.add('light')
+            this.apagarColor(color)
+            
     }
 
+    apagarColor(color){
+       setTimeout(() => {
+        this.color[color].classList.remove('light')
+       }, 500);    
+    }
+
+    eventosClick(color) {
+        let colorIluminado = color;
+        celeste.addEventListener('click',this.seleccionColor)
+        violeta.addEventListener('click',this.seleccionColor) 
+        naranja.addEventListener('click',this.seleccionColor) 
+        naranja.addEventListener('click',this.seleccionColor) 
+        this.seleccionColor(color)   
+    }
+
+    seleccionColor(){  
+             
+    }
 }
 
 
